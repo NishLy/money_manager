@@ -144,6 +144,9 @@ class _ShowTransactionsState extends State<ShowTransactions> {
                 )
               ];
 
+              mappedWidget = Map.fromEntries(mappedWidget.entries.toList()
+                ..sort((e1, e2) => e2.key.compareTo(e1.key)));
+
               for (String key in mappedWidget.keys) {
                 if (mappedWidget[key]!.isNotEmpty) {
                   DateTime date = DateTime.parse(key);
