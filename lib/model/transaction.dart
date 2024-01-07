@@ -52,4 +52,15 @@ class TranscationModel {
       category: map['category'],
     );
   }
+
+  factory TranscationModel.sumFromMap(Map<String, dynamic> map) {
+    return TranscationModel(
+      id: map['id'],
+      title: map['title'],
+      amount: map['amount'],
+      date: DateTime.parse(map['date']),
+      transcationType: map['transcation_type'],
+      category: map['category'],
+    );
+  }
 }

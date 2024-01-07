@@ -88,4 +88,20 @@ class DbTransactionHelper {
       whereArgs: [id],
     );
   }
+
+  Future<int> deleteAllTransactions() async {
+    Database? db = await this.db;
+    return await db!.delete('transactions');
+  }
+
+  Future getSumTransactionPeriod(String start, String end) async {
+    Database? db = await this.db;
+    var result = await db!.query('transactions',
+        columns: ['SUM(amount) as total', 'transcation_type', 'category'],
+        where: 'date BETWEEN ? AND ?',
+        whereArgs: [start, "$end 23:59:59"],
+        groupBy: 'transcation_type, category');
+
+    return result;
+  }
 }

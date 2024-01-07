@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/widgets/laporan.dart';
 import 'package:money_manager/widgets/pemasukan.dart';
 import 'package:money_manager/widgets/pengeluaran.dart';
 import 'package:money_manager/widgets/transactions.dart';
@@ -11,6 +12,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int indexMenu = 0;
+
+  final List<Widget> screens = [
+    const ShowTransactions(),
+    const LaporanScreen(),
+    // const TentangScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +73,14 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: const ShowTransactions(),
+        body: screens[indexMenu],
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: indexMenu,
+          onTap: (int index) {
+            setState(() {
+              indexMenu = index;
+            });
+          },
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),

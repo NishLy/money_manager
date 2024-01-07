@@ -155,7 +155,7 @@ class _ShowTransactionsState extends State<ShowTransactions> {
                       Container(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "${month[date.month]} ${date.day}, ${date.year}",
+                            "${month[date.month - 1]} ${date.day}, ${date.year}",
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )));
@@ -246,7 +246,8 @@ class CardTransaction extends StatelessWidget {
                           ? Colors.green
                           : Colors.red,
                       fontSize: 16)),
-              Text("${month[transaction.date.month]} ${transaction.date.day} "),
+              Text(
+                  "${month[transaction.date.month - 1]} ${transaction.date.day} "),
             ],
           )),
     );
