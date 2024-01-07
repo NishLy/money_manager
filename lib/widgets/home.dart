@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.add),
+                leading: const Icon(Icons.add_circle_outline_outlined),
                 title: const Text('Tambah Pemasukan'),
                 onTap: () {
                   Navigator.push(
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.add),
+                leading: const Icon(Icons.remove_circle_outline_outlined),
                 title: const Text('Tambah Pengeluaran'),
                 onTap: () {
                   Navigator.push(

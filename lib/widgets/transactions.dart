@@ -94,7 +94,18 @@ class _ShowTransactionsState extends State<ShowTransactions> {
                             _refresh();
                           });
                         },
-                        child: const Text("Semua")),
+                        style: transactionType == "all"
+                            ? ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                              )
+                            : null,
+                        child: Text(
+                          "Semua",
+                          style: transactionType == "all"
+                              ? const TextStyle(color: Colors.white)
+                              : null,
+                        )),
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -102,7 +113,16 @@ class _ShowTransactionsState extends State<ShowTransactions> {
                             _refresh();
                           });
                         },
-                        child: const Text("Pemasukan")),
+                        style: transactionType == "income"
+                            ? ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                              )
+                            : null,
+                        child: Text("Pemasukan",
+                            style: transactionType == "income"
+                                ? const TextStyle(color: Colors.white)
+                                : null)),
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -110,7 +130,16 @@ class _ShowTransactionsState extends State<ShowTransactions> {
                             _refresh();
                           });
                         },
-                        child: const Text("Pengeluaran")),
+                        style: transactionType == "expense"
+                            ? ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                              )
+                            : null,
+                        child: Text("Pengeluaran",
+                            style: transactionType == "expense"
+                                ? const TextStyle(color: Colors.white)
+                                : null)),
                   ],
                 )
               ];
