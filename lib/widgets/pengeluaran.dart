@@ -6,14 +6,14 @@ import 'package:money_manager/widgets/home.dart';
 
 List<String> dropdownMenuEntries = Category.values.map((e) => e.name).toList();
 
-class PemasukanScreen extends StatefulWidget {
-  const PemasukanScreen({super.key});
+class PengeluaraanScreen extends StatefulWidget {
+  const PengeluaraanScreen({super.key});
 
   @override
-  State<PemasukanScreen> createState() => _PemasukanScreenState();
+  State<PengeluaraanScreen> createState() => _PemasukanScreenState();
 }
 
-class _PemasukanScreenState extends State<PemasukanScreen> {
+class _PemasukanScreenState extends State<PengeluaraanScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController dateInput = TextEditingController();
@@ -33,11 +33,11 @@ class _PemasukanScreenState extends State<PemasukanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tambah Pemasukan')),
+      appBar: AppBar(title: const Text('Pengerluaran')),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          const Text("Tambah Pemasukan", style: TextStyle(fontSize: 20)),
+          const Text("Tambah Pengeluaraan", style: TextStyle(fontSize: 20)),
           const SizedBox(height: 10),
           TextField(
             decoration: const InputDecoration(
@@ -110,7 +110,7 @@ class _PemasukanScreenState extends State<PemasukanScreen> {
                   title: titleController.text,
                   amount: double.tryParse(amountController.text) ?? 0,
                   date: DateTime.parse(dateInput.text),
-                  transcationType: 'income',
+                  transcationType: 'expense',
                   category: categoryController.text));
 
               if (result > 0) {
