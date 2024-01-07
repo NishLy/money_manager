@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/helpers/transaction.dart';
 import 'package:money_manager/model/transaction.dart';
+import 'package:money_manager/widgets/update.dart';
 
 List<String> month = [
   "Jan",
@@ -226,6 +227,18 @@ class CardTransaction extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: ListTile(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return UpdateScreen(
+                id: transaction.id ?? -1,
+                title: transaction.title,
+                amount: transaction.amount,
+                date: transaction.date,
+                category: transaction.category,
+                transactionType: transaction.transcationType,
+              );
+            }));
+          },
           leading: Card(
             color: Theme.of(context).colorScheme.surfaceVariant,
             child: Padding(

@@ -96,11 +96,10 @@ class DbTransactionHelper {
 
   Future getSumTransactionPeriod(String start, String end) async {
     Database? db = await this.db;
-    var result = await db!.query('transactions',
-        columns: ['SUM(amount) as total', 'transcation_type', 'category'],
-        where: 'date BETWEEN ? AND ?',
-        whereArgs: [start, "$end 23:59:59"],
-        groupBy: 'transcation_type, category');
+    var result = await db!.rawQuery(
+      'SELECT category, transcation_type, SUM(amount) as total FROM transactions WHERE date BETWEEN ? AND ? GROUP BY category, transcation_type',
+      [start, end],
+    );
 
     return result;
   }

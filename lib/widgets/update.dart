@@ -6,28 +6,46 @@ import 'package:money_manager/widgets/home.dart';
 
 List<String> dropdownMenuEntries = Category.values.map((e) => e.name).toList();
 
-class PemasukanScreen extends StatefulWidget {
-  const PemasukanScreen({super.key});
+class UpdateScreen extends StatefulWidget {
+  final int id;
+  final String title;
+  final double amount;
+  final DateTime date;
+  final String category;
+  final String transactionType;
+  const UpdateScreen(
+      {super.key,
+      required this.id,
+      required this.title,
+      required this.amount,
+      required this.date,
+      required this.category,
+      required this.transactionType});
 
   @override
-  State<PemasukanScreen> createState() => _PemasukanScreenState();
+  State<UpdateScreen> createState() => _PemasukanScreenState();
 }
 
-class _PemasukanScreenState extends State<PemasukanScreen> {
+class _PemasukanScreenState extends State<UpdateScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController dateInput = TextEditingController();
   TextEditingController categoryController = TextEditingController();
+  int id = -1;
+  String transactionType = "income";
 
   @override
   void initState() {
     super.initState();
     dateInput.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
     categoryController.text = dropdownMenuEntries.first;
-  }
 
-  Future<int> _insertTransaction(TranscationModel input) async {
-    return await DbTransactionHelper.instance.insertTransaction(input);
+    id = widget.id;
+    transactionType = widget.transactionType;
+    titleController.text = widget.title;
+    amountController.text = widget.amount.toString();
+    dateInput.text = DateFormat('yyyy-MM-dd').format(widget.date);
+    categoryController.text = widget.category;
   }
 
   @override
@@ -107,29 +125,64 @@ class _PemasukanScreenState extends State<PemasukanScreen> {
             },
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () async {
-              int result = await _insertTransaction(TranscationModel(
-                  title: titleController.text,
-                  amount: double.tryParse(amountController.text) ?? 0,
-                  date: DateTime.parse(dateInput.text),
-                  transcationType: 'income',
-                  category: categoryController.text));
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () async {
+                    int result = await DbTransactionHelper.instance
+                        .deleteTransaction(id);
 
-              if (result > 0) {
-                // ignore: use_build_context_synchronously
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Berhasil disimpan')));
-                // ignore: use_build_context_synchronously
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Home(),
-                    ));
-              }
-            },
-            child: const Text('Simpan'),
-          ),
+                    if (result > 0) {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Berhasil dihapus')));
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ));
+                    }
+                  },
+                  child: const Text('Hapus'),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    int result = await DbTransactionHelper.instance
+                        .updateTransaction(TranscationModel(
+                            id: id,
+                            title: titleController.text,
+                            amount: double.parse(amountController.text),
+                            date: DateTime.parse(dateInput.text),
+                            category: categoryController.text,
+                            transcationType: transactionType));
+
+                    if (result > 0) {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Berhasil disimpan')));
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ));
+                    }
+                  },
+                  child: const Text('Simpan'),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

@@ -51,6 +51,7 @@ class _PemasukanScreenState extends State<PengeluaraanScreen> {
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Jumlah',
+              prefixIcon: Icon(Icons.attach_money),
             ),
             controller: amountController,
             keyboardType: TextInputType.number,
@@ -88,6 +89,7 @@ class _PemasukanScreenState extends State<PengeluaraanScreen> {
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Kategori',
+              prefixIcon: Icon(Icons.category),
             ),
             isExpanded: true,
             value: categoryController.text,

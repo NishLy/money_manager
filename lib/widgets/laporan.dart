@@ -56,7 +56,11 @@ class _LaporanScreenState extends State<LaporanScreen> {
       }
     }
 
-    setState(() {});
+    setState(() {
+      sumPemasukan = sumPemasukan;
+      sumPengeluaran = sumPengeluaran;
+      mappedLaporanPengeluaran = mappedLaporanPengeluaran;
+    });
   }
 
   @override
@@ -137,11 +141,11 @@ class _LaporanScreenState extends State<LaporanScreen> {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Text(
               "Total",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             TextField(
-              style: const TextStyle(fontSize: 18, color: Colors.green),
+              style: const TextStyle(fontSize: 16, color: Colors.green),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Pemasukan',
@@ -155,7 +159,7 @@ class _LaporanScreenState extends State<LaporanScreen> {
             ),
             const SizedBox(height: 10),
             TextField(
-              style: const TextStyle(fontSize: 18, color: Colors.red),
+              style: const TextStyle(fontSize: 16, color: Colors.red),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Pengeluaran',
@@ -185,63 +189,66 @@ class _LaporanScreenState extends State<LaporanScreen> {
             ),
           ]),
           const SizedBox(height: 20),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Text(
-              "Total Pemasukan Berdasarkan Kategori",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(mappedLaporanPengeluaran['income']?[index]
-                          ['category'] ??
-                      ''),
-                  trailing: Text(
-                      NumberFormat.currency(
-                              locale: 'id', symbol: 'Rp ', decimalDigits: 0)
-                          .format(mappedLaporanPengeluaran['income']?[index]
-                                  ['total'] ??
-                              0),
-                      style:
-                          const TextStyle(color: Colors.green, fontSize: 14)),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider();
-              },
-              itemCount: mappedLaporanPengeluaran['income']?.length ?? 0,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-            )
-          ]),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Text(
-              "Total Pengeluaran Berdasarkan Kategori",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(mappedLaporanPengeluaran['expense']?[index]
-                          ['category'] ??
-                      ''),
-                  trailing: Text(
-                      NumberFormat.currency(
-                              locale: 'id', symbol: 'Rp ', decimalDigits: 0)
-                          .format(mappedLaporanPengeluaran['expense']?[index]
-                                  ['total'] ??
-                              0),
-                      style: const TextStyle(color: Colors.red, fontSize: 14)),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider();
-              },
-              itemCount: mappedLaporanPengeluaran['expense']?.length ?? 0,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-            )
-          ])
+          ExpansionTile(
+              title: const Text(
+                "Total Pemasukan ",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              children: [
+                ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(mappedLaporanPengeluaran['income']?[index]
+                              ['category'] ??
+                          ''),
+                      trailing: Text(
+                          NumberFormat.currency(
+                                  locale: 'id', symbol: 'Rp ', decimalDigits: 0)
+                              .format(mappedLaporanPengeluaran['income']?[index]
+                                      ['total'] ??
+                                  0),
+                          style: const TextStyle(
+                              color: Colors.green, fontSize: 14)),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider();
+                  },
+                  itemCount: mappedLaporanPengeluaran['income']?.length ?? 0,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                )
+              ]),
+          ExpansionTile(
+              title: const Text(
+                "Total Pengeluaran",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              children: [
+                ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(mappedLaporanPengeluaran['expense']?[index]
+                              ['category'] ??
+                          ''),
+                      trailing: Text(
+                          NumberFormat.currency(
+                                  locale: 'id', symbol: 'Rp ', decimalDigits: 0)
+                              .format(mappedLaporanPengeluaran['expense']
+                                      ?[index]['total'] ??
+                                  0),
+                          style:
+                              const TextStyle(color: Colors.red, fontSize: 14)),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider();
+                  },
+                  itemCount: mappedLaporanPengeluaran['expense']?.length ?? 0,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                )
+              ])
         ]));
   }
 }
