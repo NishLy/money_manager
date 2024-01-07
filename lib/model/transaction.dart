@@ -15,10 +15,10 @@ enum Category {
 }
 
 class TranscationModel {
-  final String? id;
+  final int? id;
   final String title;
   final double amount;
-  final Enum transcationType;
+  final String transcationType;
   final DateTime date;
   final String category;
 
@@ -48,7 +48,7 @@ class TranscationModel {
       title: map['title'],
       amount: map['amount'],
       date: DateTime.parse(map['date']),
-      transcationType: map['transcationType'],
+      transcationType: map['transcation_type'],
       category: map['category'],
     );
   }

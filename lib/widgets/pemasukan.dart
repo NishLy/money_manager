@@ -109,7 +109,7 @@ class _PemasukanScreenState extends State<PemasukanScreen> {
                   title: titleController.text,
                   amount: double.tryParse(amountController.text) ?? 0,
                   date: DateTime.parse(dateInput.text),
-                  transcationType: TranscationType.income,
+                  transcationType: 'income',
                   category: categoryController.text));
 
               if (result > 0) {
