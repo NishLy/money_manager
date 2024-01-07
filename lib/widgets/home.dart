@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/widgets/about.dart';
 import 'package:money_manager/widgets/laporan.dart';
 import 'package:money_manager/widgets/pemasukan.dart';
 import 'package:money_manager/widgets/pengeluaran.dart';
@@ -17,7 +18,7 @@ class _HomeState extends State<Home> {
   final List<Widget> screens = [
     const ShowTransactions(),
     const LaporanScreen(),
-    // const TentangScreen(),
+    const AboutScreen(),
   ];
 
   @override
@@ -91,7 +92,7 @@ class _HomeState extends State<Home> {
               label: 'Laporan',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.note),
+              icon: Icon(Icons.info),
               label: 'Tentang Aplikasi',
             ),
           ],

@@ -53,6 +53,7 @@ class _PemasukanScreenState extends State<PengeluaraanScreen> {
               labelText: 'Jumlah',
             ),
             controller: amountController,
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 10),
           TextField(

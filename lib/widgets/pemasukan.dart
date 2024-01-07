@@ -52,6 +52,7 @@ class _PemasukanScreenState extends State<PemasukanScreen> {
               border: OutlineInputBorder(),
               labelText: 'Jumlah',
             ),
+            keyboardType: TextInputType.number,
             controller: amountController,
           ),
           const SizedBox(height: 10),

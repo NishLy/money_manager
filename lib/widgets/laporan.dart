@@ -23,6 +23,7 @@ class _LaporanScreenState extends State<LaporanScreen> {
     dateInput.text = DateFormat('yyyy-MM-dd')
         .format(DateTime.now().subtract(const Duration(days: 30)));
     dateInputEnd.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    getLaporanPeriod();
   }
 
   Map<String, List<Map<String, dynamic>>> mappedLaporanPengeluaran = {
@@ -31,6 +32,11 @@ class _LaporanScreenState extends State<LaporanScreen> {
   };
 
   Future getLaporanPeriod() async {
+    sumPemasukan = 0;
+    sumPengeluaran = 0;
+    mappedLaporanPengeluaran['income'] = [];
+    mappedLaporanPengeluaran['expense'] = [];
+
     var result = await DbTransactionHelper.instance
         .getSumTransactionPeriod(dateInput.text, dateInputEnd.text);
 
