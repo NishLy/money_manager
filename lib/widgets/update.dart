@@ -51,11 +51,10 @@ class _PemasukanScreenState extends State<UpdateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tambah Pemasukan')),
+      appBar: AppBar(title: const Text('Edit Transaksi')),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          const Text("Tambah Pemasukan", style: TextStyle(fontSize: 20)),
           const SizedBox(height: 10),
           TextField(
             decoration: const InputDecoration(

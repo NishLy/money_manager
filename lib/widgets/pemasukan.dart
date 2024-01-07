@@ -37,7 +37,6 @@ class _PemasukanScreenState extends State<PemasukanScreen> {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          const Text("Tambah Pemasukan", style: TextStyle(fontSize: 20)),
           const SizedBox(height: 10),
           TextField(
             decoration: const InputDecoration(
